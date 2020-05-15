@@ -1,4 +1,7 @@
+import serial
+
 class ComSerial:
+
     """
     Esta clase realiza las comunicacnion atravez de puerto serie
     a un microcontrolador y este pueda realizar alguna accion

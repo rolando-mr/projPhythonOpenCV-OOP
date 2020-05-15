@@ -12,9 +12,9 @@ class LineFollowerRobot:
     theta = 0
     threshold = 6
 
-    def __init__(self, camera, comSerial):
+    def __init__(self, camera, com_serial):
         self.camera = camera
-        self.comSerial = comSerial
+        self.com_serial = com_serial
 
     def star(self):
         while True:
@@ -25,18 +25,18 @@ class LineFollowerRobot:
                 if grabbed:
                     cv2.imshow('Video', frame)
 
-                    theta, image = ProcImage.procesar_imagen(frame)
-                    self.comSerial.go_forward_to(self.threshold, theta)
+                    theta, image = ProcImage.process_image(frame)
+                    self.com_serial.go_forward_to(self.threshold, theta)
                     theta = 0
 
                     cv2.imshow("Frame", image)
                     if cv2.waitKey(1) == ord('q'):
                         # Press Q on keyboard to  exit
-                        print('Transmisión detenida debido a evento de tecla presionada')
-                        self.comSerial.stop_go_forward_to()
+                        print("Transmisión detenida debido a evento de tecla presionada")
+                        self.com_serial.stop_go_forward_to()
                         break
 
             except KeyboardInterrupt:
-                self.comSerial.stop_go_forward_to()
+                self.com_serial.stop_go_forward_to()
         # Closes all the frames
         cv2.destroyAllWindows()

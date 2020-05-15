@@ -13,15 +13,15 @@ class ProcImage:
     maxLineGap = 10
 
     @staticmethod
-    def procesar_imagen(frame, minLineLength=5, maxLineGap=10):
+    def process_image(frame, min_line_length=5, max_line_gap=10):
         theta = 0
         image = frame  # frame.array (picamera)
-        # image = cv2.imread(r'1der.png') # para probar con fotografias
+        #image = cv2.imread(r'images/dir_derecha.png') # para probar con fotos descomentar y agregar r'images/name_img.png'
         image = cv2.resize(image, (500, 300))
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         blurred = cv2.GaussianBlur(gray, (5, 5), 0)
         edged = cv2.Canny(blurred, 85, 85)
-        lines = cv2.HoughLinesP(edged, 1, np.pi / 180, 10, minLineLength, maxLineGap)
+        lines = cv2.HoughLinesP(edged, 1, np.pi / 180, 10, min_line_length, max_line_gap)
         for x in range(0, len(lines)):
             for x1, y1, x2, y2 in lines[x]:
                 cv2.line(image, (x1, y1), (x2, y2), (0, 255, 0), 2)
